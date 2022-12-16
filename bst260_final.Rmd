@@ -323,7 +323,7 @@ plot(test$Class, test$TOD, ylab = "TOD", xlab = "Class", main = "TOD vs Class")
 
 ```
 
-Afterward, 100 KNN models, each with a different k value ranging from 1 to 100, were trained using the training set and applied to the test set. The outcome of each model was “Class”, and the predictors were “Year”, “Season”, “Region”, “Status”, and “TOD”. The accuracy of each model was computed and stored, and the k-value with the highest accuracy would be selected for the final model. In this case, the best k-value was 19, which resulted in an accuracy of 0.63.
+Afterward, 100 KNN models, each with a different k value ranging from 1 to 100, were trained using the training set and applied to the test set. The outcome of each model was “Class”, and the predictors were “Year”, “Season”, “Region”, “Status”, and “TOD”. The accuracy of each model was computed and stored, and the k-value with the highest accuracy in the test set would be selected for the final model. In this case, the best k-value was 19, which resulted in an accuracy of 0.63.
 
 ```{r, echo=FALSE}
 # Accuracy Plot
@@ -367,6 +367,7 @@ cm$overall["Accuracy"]
 
 ```
 
+It's worth noting that this approach breaks the "golden rule of machine learning": allowing the test data to influence the model. I shouldn't expect this accuracy value to translate into other, real-world data [5].
 
 In this context, accuracy can be interpreted as the proportion of bigfoot sightings that were correctly categorized in the test set [5]. Thus, when the k-value is 19, the resulting KNN model can correctly classify 63% of the sightings, which is a little better than guessing at random (in that case, accuracy would be around 50%). However, when taking a look at the confusion matrix, we can see that more true Class A sightings were misclassified as Class B than correctly classified (large number of false negatives), and the trend is reversed for Class B (low number of false positives). 
 
@@ -403,7 +404,7 @@ The goal of this project was to see if I could train a KNN model that could accu
 
 I think the analysis was somewhat successful. The accuracy of the final model is better than random, but it’s still not ideal. One possible cause for the lackluster performance could be the small sample size of the training set. After filtering, the number of data points went down to 968, which led to 483 data points being included in the training set. In theory, more data would help produce a better model.
 
-If I had more time, I would spend it on refining my regex calls for the “Status” and “TOD” variables. Considering more possible patterns for each variable level (ex. Status = “Hiker”) could help retain more data points, which would help model accuracy. Furthermore, I might also try different machine learning methods (ex. regression) and see if those perform better.
+If I had more time, I would spend it on refining my regex calls for the “Status” and “TOD” variables. Considering more possible patterns for each variable level (ex. Status = “Hiker”) could help retain more data points, which would help model accuracy. Furthermore, I would use cross-validation instead as the method of selecting an optimal k-value, and I might try other machine-learning methods (ex. regression) to compare their performance.
 
 
 ## References

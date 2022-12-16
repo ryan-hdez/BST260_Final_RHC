@@ -139,14 +139,19 @@ Afterward, 100 KNN models, each with a different k value ranging from 1
 to 100, were trained using the training set and applied to the test set.
 The outcome of each model was “Class”, and the predictors were “Year”,
 “Season”, “Region”, “Status”, and “TOD”. The accuracy of each model was
-computed and stored, and the k-value with the highest accuracy would be
-selected for the final model. In this case, the best k-value was 19,
-which resulted in an accuracy of 0.63.
+computed and stored, and the k-value with the highest accuracy in the
+test set would be selected for the final model. In this case, the best
+k-value was 19, which resulted in an accuracy of 0.63.
 
 ![](bst260_final_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
     ##  Accuracy 
     ## 0.6329897
+
+It’s worth noting that this approach breaks the “golden rule of machine
+learning”: allowing the test data to influence the model. I shouldn’t
+expect this accuracy value to translate into other, real-world data
+\[5\].
 
 In this context, accuracy can be interpreted as the proportion of
 bigfoot sightings that were correctly categorized in the test set \[5\].
@@ -212,9 +217,10 @@ In theory, more data would help produce a better model.
 If I had more time, I would spend it on refining my regex calls for the
 “Status” and “TOD” variables. Considering more possible patterns for
 each variable level (ex. Status = “Hiker”) could help retain more data
-points, which would help model accuracy. Furthermore, I might also try
-different machine learning methods (ex. regression) and see if those
-perform better.
+points, which would help model accuracy. Furthermore, I would use
+cross-validation instead as the method of selecting an optimal k-value,
+and I might try other machine-learning methods (ex. regression) to
+compare their performance.
 
 ## References
 
